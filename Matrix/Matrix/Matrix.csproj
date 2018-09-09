@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;net45;net452</TargetFrameworks>
+    <AssemblyName>NMatrix</AssemblyName>
+    <RootNamespace>System.Numerics</RootNamespace>
+    <Version>0.1.0</Version>
+    <Authors>vlasovsv</Authors>
+    <Company />
+    <RepositoryUrl>https://github.com/vlasovsv/Matrix</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/vlasovsv/Matrix</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/vlasovsv/Matrix/blob/master/LICENSE</PackageLicenseUrl>
+    <Description>General purpose matrix library.</Description>
+    <PackageTags>matrix detrerminant inverse transpose</PackageTags>
+  </PropertyGroup>
+
+</Project>
