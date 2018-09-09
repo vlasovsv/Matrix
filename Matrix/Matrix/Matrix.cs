@@ -100,7 +100,7 @@ namespace System.Numerics
                 throw new ArgumentNullException(nameof(matrix), "Matrix could not be null.");
             }
 
-            if (Columns != matrix.Columns || Rows != matrix.Rows)
+            if (Rows != matrix.Rows || Columns != matrix.Columns)
             {
                 throw new MatrixInconsistencyException(
                     $"Matrix one [{Rows}x{Columns}] does not correspond to Matrix Two [{matrix.Rows}x{matrix.Columns}].");
@@ -209,6 +209,18 @@ namespace System.Numerics
         }
 
         /// <summary>
+        /// Divides on a scalar.
+        /// </summary>
+        /// <param name="x">Scalar.</param>
+        /// <returns>
+        /// Returns a new matrix diveded on this scalar.
+        /// </returns>
+        public Matrix Divide(double x)
+        {
+            return Multiply(1f / x);
+        }
+
+        /// <summary>
         /// Gets a minor matrix for corresponding matrix element.
         /// </summary>
         /// <param name="row">Element's row index.</param>
@@ -230,7 +242,7 @@ namespace System.Numerics
 
             if (Rows <= 2 || Columns <= 2)
             {
-                throw new MatrixInconsistencyException("In order to get minor matrix the orginal matrix has to be more than 3x3.");
+                throw new MatrixInconsistencyException("In order to get a minor matrix the orginal matrix has to be more or equal than 3x3.");
             }
 
             var minorRows = Rows - 1;
@@ -473,7 +485,7 @@ namespace System.Numerics
         /// <returns>
         /// Returns a result of dividing of matrix and a scalar.
         /// </returns>
-        public static Matrix operator /(Matrix m1, double scalar) => m1.Multiply(1 / scalar);
+        public static Matrix operator /(Matrix m1, double scalar) => m1.Divide(scalar);
 
         /// <summary>
         /// Transposes a matrix.

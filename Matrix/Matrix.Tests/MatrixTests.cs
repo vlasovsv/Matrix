@@ -116,6 +116,28 @@ namespace System.Numerics
         }
 
         [Test]
+        public void Matrix_MultiplyOnScalar_ReturnsAsExpected()
+        {
+            var m = new Matrix(2, 2, new double[2, 2] { { 2, 2 }, { 2, 2 } });
+            var expected = new Matrix(2, 2, new double[2, 2] { { 4, 4 }, { 4, 4 } });
+
+            var result = m * 2;
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void Matrix_DivideOnScalar_ReturnsAsExpected()
+        {
+            var m = new Matrix(2, 2, new double[2, 2] { { 2, 2 }, { 2, 2 } });
+            var expected = new Matrix(2, 2, new double[2, 2] { { 1, 1 }, { 1, 1 } });
+
+            var result = m / 2;
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
         public void MatrixOperatorChains_ReturnsResultAsExpected()
         {
             var m1 = new Matrix(2, 2, new double[2, 2] { { 2, 2 }, { 2, 2 } });
@@ -219,6 +241,17 @@ namespace System.Numerics
             var expected = Matrix.Identity(3);
 
             var result = m1 * !m1;
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void Matrix_Adjoint_ReturnsAsExpected()
+        {
+            var m = new Matrix(3, 3, new double[,] { { 1, 2, 3 }, { 7, 2, 5 }, { 8, 1, 3 } });
+            var expected = new Matrix(3, 3, new double[,] { { 1, -3, 4 }, { 19, -21, 16 }, { -9, 15, -12 } });
+
+            var result = m.Adjoint();
 
             Assert.AreEqual(expected, result);
         }
