@@ -58,7 +58,7 @@ namespace System.Numerics
         }
 
         [Test]
-        public void Matrix_Substruct_ReturnsResultAsExpected()
+        public void Matrix_Subtract_ReturnsResultAsExpected()
         {
             var matrix1 = new Matrix(2, 3, new double[,] { { 1, 2, 3 }, { 4, 5, 6 } });
             var matrix2 = new Matrix(2, 3, new double[,] { { 1, 2, 3 }, { 4, 5, 6 } });
@@ -70,20 +70,20 @@ namespace System.Numerics
         }
 
         [Test]
-        public void Matrix_SubstructWhenMatricesHaveDiferentSizes_ThowsMatrixIncosistencyException()
+        public void Matrix_SubtractWhenMatricesHaveDifferentSizes_ThowsMatrixIncosistencyException()
         {
             var matrix1 = new Matrix(2, 2);
             var matrix2 = new Matrix(3, 2);
 
-            Assert.Throws<MatrixInconsistencyException>(() => matrix1.Substruct(matrix2));
+            Assert.Throws<MatrixInconsistencyException>(() => matrix1.Subtract(matrix2));
         }
 
         [Test]
-        public void Matrix_SubstructWhenMatrixIsNull_ThowsArgumentNullException()
+        public void Matrix_SubtractWhenMatrixIsNull_ThowsArgumentNullException()
         {
             var matrix1 = new Matrix(2, 2);
 
-            Assert.Throws<ArgumentNullException>(() => matrix1.Substruct(null));
+            Assert.Throws<ArgumentNullException>(() => matrix1.Subtract(null));
         }
 
         [Test]

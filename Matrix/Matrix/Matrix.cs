@@ -119,13 +119,13 @@ namespace System.Numerics
         }
 
         /// <summary>
-        /// Substructs a matrix.
+        /// Subtracts a matrix.
         /// </summary>
         /// <param name="matrix">A matrix.</param>
         /// <returns>
-        /// Returns a result of substructing of two matrices.
+        /// Returns a result of subtracting of two matrices.
         /// </returns>
-        public Matrix Substruct(Matrix matrix)
+        public Matrix Subtract(Matrix matrix)
         {
             if (matrix == null)
             {
@@ -436,14 +436,14 @@ namespace System.Numerics
         public static Matrix operator +(Matrix m1, Matrix m2) => m1.Add(m2);
 
         /// <summary>
-        /// Substructs two matrices.
+        /// Subtracts two matrices.
         /// </summary>
         /// <param name="m1">Matrix one.</param>
         /// <param name="m2">Matrix one.</param>
         /// <returns>
-        /// Returns a result of sunstructing of two matrices.
+        /// Returns a result of subtracting of two matrices.
         /// </returns>
-        public static Matrix operator -(Matrix m1, Matrix m2) => m1.Substruct(m2);
+        public static Matrix operator -(Matrix m1, Matrix m2) => m1.Subtract(m2);
 
         /// <summary>
         /// Multiplies two matrices.
@@ -466,12 +466,12 @@ namespace System.Numerics
         public static Matrix operator *(Matrix m1, double scalar) => m1.Multiply(scalar);
 
         /// <summary>
-        /// Divedes a matrix on a scalar.
+        /// Divides a matrix on a scalar.
         /// </summary>
         /// <param name="m1">A matrix.</param>
         /// <param name="scalar">A scalar.</param>
         /// <returns>
-        /// Returns a result of multiplying of matrix and a scalar.
+        /// Returns a result of dividing of matrix and a scalar.
         /// </returns>
         public static Matrix operator /(Matrix m1, double scalar) => m1.Multiply(1 / scalar);
 
