@@ -1,4 +1,7 @@
 configuration: Release
+version: '0.1.{build}'
+platform: Any CPU
+image: Visual Studio 2017
 
 build:
   verbosity: minimal
