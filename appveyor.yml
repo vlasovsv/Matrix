@@ -4,7 +4,7 @@ platform: Any CPU
 image: Visual Studio 2017
 
 before_build:
-  - nuget restore
+  - nuget restore C:\projects\matrix\Matrix\Matrix.sln
 
 build:
   verbosity: minimal
