@@ -1,3 +1,9 @@
+# Build Status
+
+|          | Status |
+| -------- | ------ |
+| NMatrix | [![Build status](https://ci.appveyor.com/api/projects/status/8er5o6y5dqdu8iq4/branch/master?svg=true)](https://ci.appveyor.com/project/vlasovsv/matrix/branch/master) |
+
 # Matrix
 NMatrix is a general purpose matrix library that you can use to perform basic matrix operations like:
 * Adding
