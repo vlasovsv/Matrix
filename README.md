@@ -6,7 +6,7 @@
 
 # Matrix
 NMatrix is a general purpose matrix library that you can use to perform basic matrix operations like:
-* Adding
+* Addition
 * Subtraction
 * Multiplication
 * Getting a determinant
@@ -40,7 +40,7 @@ X = 2 x 2
 ```
 
 # Matrix operations
-## Adding
+## Addition
 
 In order to add two matrices you can use an instance method **Add** or use an operator **"+"**:
 ```csharp

@@ -1,7 +1,8 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Text;
 
-namespace System.Numerics
+namespace NMatrix
 {
     /// <summary>
     /// Represents a matrix class.
@@ -15,7 +16,6 @@ namespace System.Numerics
         private readonly int _columns;
 
         #endregion
-
 
         #region Constructors
 
@@ -91,7 +91,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="matrix">A matrix.</param>
         /// <returns>
-        /// Returns a result of adding of two matrices.
+        /// Returns a result of addition of two matrices.
         /// </returns>
         public Matrix Add(Matrix matrix)
         {
@@ -123,7 +123,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="matrix">A matrix.</param>
         /// <returns>
-        /// Returns a result of subtracting of two matrices.
+        /// Returns a result of subtraction of two matrices.
         /// </returns>
         public Matrix Subtract(Matrix matrix)
         {
@@ -155,7 +155,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="matrix">A matrix.</param>
         /// <returns>
-        /// Returns a result of multiplying of two matrices.
+        /// Returns a result of multiplication of two matrices.
         /// </returns>
         public Matrix Multiply(Matrix matrix)
         {
@@ -191,7 +191,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="x">Scalar.</param>
         /// <returns>
-        /// Returns a new matrix multiplied on this scalar.
+        /// Returns a new matrix multiplied by this scalar.
         /// </returns>
         public Matrix Multiply(double x)
         {
@@ -213,7 +213,7 @@ namespace System.Numerics
         /// </summary>
         /// <param name="x">Scalar.</param>
         /// <returns>
-        /// Returns a new matrix diveded on this scalar.
+        /// Returns a new matrix divided by this scalar.
         /// </returns>
         public Matrix Divide(double x)
         {
@@ -443,7 +443,7 @@ namespace System.Numerics
         /// <param name="m1">Matrix one.</param>
         /// <param name="m2">Matrix one.</param>
         /// <returns>
-        /// Returns a result of adding of two matrices.
+        /// Returns a result of addition of two matrices.
         /// </returns>
         public static Matrix operator +(Matrix m1, Matrix m2) => m1.Add(m2);
 
@@ -453,7 +453,7 @@ namespace System.Numerics
         /// <param name="m1">Matrix one.</param>
         /// <param name="m2">Matrix one.</param>
         /// <returns>
-        /// Returns a result of subtracting of two matrices.
+        /// Returns a result of subtraction of two matrices.
         /// </returns>
         public static Matrix operator -(Matrix m1, Matrix m2) => m1.Subtract(m2);
 
@@ -463,7 +463,7 @@ namespace System.Numerics
         /// <param name="m1">Matrix one.</param>
         /// <param name="m2">Matrix one.</param>
         /// <returns>
-        /// Returns a result of multiplying of two matrices.
+        /// Returns a result of multiplication of two matrices.
         /// </returns>
         public static Matrix operator *(Matrix m1, Matrix m2) => m1.Multiply(m2);
 
@@ -473,7 +473,7 @@ namespace System.Numerics
         /// <param name="m1">A matrix.</param>
         /// <param name="scalar">A scalar.</param>
         /// <returns>
-        /// Returns a result of multiplying of matrix and a scalar.
+        /// Returns a result of multiplication of a matrix by a scalar.
         /// </returns>
         public static Matrix operator *(Matrix m1, double scalar) => m1.Multiply(scalar);
 
@@ -483,7 +483,7 @@ namespace System.Numerics
         /// <param name="m1">A matrix.</param>
         /// <param name="scalar">A scalar.</param>
         /// <returns>
-        /// Returns a result of dividing of matrix and a scalar.
+        /// Returns a result of division of matrix by a scalar.
         /// </returns>
         public static Matrix operator /(Matrix m1, double scalar) => m1.Divide(scalar);
 
@@ -530,6 +530,20 @@ namespace System.Numerics
             }
 
             return new Matrix(n, n, buffer);
+        }
+
+        /// <summary>
+        /// Creates a new matrix from buffer.
+        /// </summary>
+        /// <param name="buffer">A buffer.</param>
+        /// <returns>
+        /// Returns a new matrix.
+        /// </returns>
+        public static Matrix From(double[,] buffer)
+        {
+            var rows = buffer.GetLength(0);
+            var columns = buffer.GetLength(1);
+            return new Matrix(rows, columns, buffer);
         }
 
         #endregion

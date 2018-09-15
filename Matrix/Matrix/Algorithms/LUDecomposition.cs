@@ -1,4 +1,4 @@
-﻿namespace System.Numerics.Algorithms
+﻿namespace NMatrix.Algorithms
 {
     /// <summary>
     /// LU-decomposition solver.

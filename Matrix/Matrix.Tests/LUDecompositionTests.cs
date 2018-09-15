@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 
-using System.Numerics.Algorithms;
+using NMatrix.Algorithms;
 
-namespace System.Numerics
+namespace NMatrix
 {
     [TestFixture()]
     public class LUDecompositionTests

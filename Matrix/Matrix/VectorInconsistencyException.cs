@@ -3,9 +3,9 @@
 namespace NMatrix
 {
     /// <summary>
-    /// Represents inconsistency exception between two matrix.
+    /// Represents inconsistency exception between two vectors.
     /// </summary>
-    public class MatrixInconsistencyException : Exception
+    public class VectorInconsistencyException : Exception
     {
         #region Constructors
 
@@ -13,7 +13,7 @@ namespace NMatrix
         /// Creates a new instance of an exception.
         /// </summary>
         /// <param name="message">An error message.</param>
-        public MatrixInconsistencyException(string message)
+        public VectorInconsistencyException(string message)
             : base(message)
         {
 

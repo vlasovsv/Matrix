@@ -1,6 +1,7 @@
 using NUnit.Framework;
+using System;
 
-namespace System.Numerics
+namespace NMatrix
 {
     [TestFixture()]
     public class MatrixTests
@@ -252,6 +253,15 @@ namespace System.Numerics
             var expected = new Matrix(3, 3, new double[,] { { 1, -3, 4 }, { 19, -21, 16 }, { -9, 15, -12 } });
 
             var result = m.Adjoint();
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void Matrix_From_ReturnsAsExpected()
+        {
+            var expected = new Matrix(3, 3, new double[,] { { 1, 2, 3 }, { 7, 2, 5 }, { 8, 1, 3 } });
+            var result = Matrix.From(new double[,] { { 1, 2, 3 }, { 7, 2, 5 }, { 8, 1, 3 } });
 
             Assert.AreEqual(expected, result);
         }
