@@ -201,7 +201,7 @@ namespace NMatrix
         {
             var m = new Matrix(3, 2);
 
-            Assert.Throws<MatrixInconsistencyException>(() => m.Determinant());
+            Assert.Throws<NonSquareMatrixException>(() => m.Determinant());
         }
 
         [Test]

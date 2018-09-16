@@ -1,7 +1,9 @@
-﻿namespace NMatrix.Algorithms
+﻿using System;
+
+namespace NMatrix.Decompositions
 {
     /// <summary>
-    /// LU-decomposition solver.
+    /// LU-decomposition.
     /// </summary>
     public class LUDecomposition
     {
@@ -15,6 +17,16 @@
         /// <param name="upper">Out u (upper) matrix.</param>
         public void CalculateLUMatrices(Matrix matrix, out Matrix lower, out Matrix upper)
         {
+            if (matrix == null)
+            {
+                throw new ArgumentNullException("Original matrix cannot be null");
+            }
+
+            if (!matrix.IsSquare)
+            {
+                throw new NonSquareMatrixException("LU decomposition cannot aply to non-square matrices.");
+            }
+
             lower = new Matrix(matrix.Rows, matrix.Columns);
             upper = new Matrix(matrix.Rows, matrix.Columns);
 

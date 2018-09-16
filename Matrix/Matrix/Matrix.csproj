@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45;net452</TargetFrameworks>
     <AssemblyName>NMatrix</AssemblyName>
-    <RootNamespace>System.Numerics</RootNamespace>
+    <RootNamespace>NMatrix</RootNamespace>
     <Version>0.3.0</Version>
     <Authors>vlasovsv</Authors>
     <Company />

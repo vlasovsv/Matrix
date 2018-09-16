@@ -63,6 +63,11 @@ namespace NMatrix
         public int Columns => _columns;
 
         /// <summary>
+        /// Gets a flag if this matrix is square or not.
+        /// </summary>
+        public bool IsSquare => _rows == _columns;
+
+        /// <summary>
         /// Gets or sets a value corresponding to a row and a column of the matrix.
         /// </summary>
         /// <param name="row">Value row index.</param>
@@ -280,9 +285,9 @@ namespace NMatrix
         /// </returns>
         public double Determinant()
         {
-            if (Rows != Columns)
+            if (!IsSquare)
             {
-                throw new MatrixInconsistencyException("Attempt to find a determinant of a non square matrix");
+                throw new NonSquareMatrixException("Attempt to find a determinant of a non square matrix");
             }
 
             if (Rows == 2 && Columns == 2)
@@ -371,7 +376,7 @@ namespace NMatrix
         {
             if (Rows != Columns)
             {
-                throw new MatrixInconsistencyException("Attempt to find an adjoint matrix for the non square matrix");
+                throw new NonSquareMatrixException("Attempt to find an adjoint matrix for the non square matrix");
             }
 
             if (Rows < 2 && Columns < 2)
@@ -408,6 +413,33 @@ namespace NMatrix
             }
 
             return Adjoint() / Determinant();
+        }
+
+        /// <summary>
+        /// Checks if this matrix is symmetric or not.
+        /// </summary>
+        /// <returns>
+        /// Returns true if this matrix is symmetric, othewise - false.
+        /// </returns>
+        public bool IsSymmetric()
+        {
+            if (!IsSquare)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < Rows; i++)
+            {
+                for (int j = 0; j < Columns; j++)
+                {
+                    if (this[i, j] != this[j, i])
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         private void CheckSize(int rows, int columns)
@@ -520,7 +552,7 @@ namespace NMatrix
         {
             if (n < 2)
             {
-                throw new MatrixInconsistencyException("Size of a square matrix could not be less than 2.");
+                throw new ArgumentException("Size of a square matrix could not be less than 2.", nameof(n));
             }
 
             var buffer = new double[n, n];

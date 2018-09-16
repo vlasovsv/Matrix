@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <AssemblyName>NMatrix.Tests</AssemblyName>
+
+    <RootNamespace>NMatrix.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
