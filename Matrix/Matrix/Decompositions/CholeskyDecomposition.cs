@@ -25,7 +25,7 @@ namespace NMatrix.Decompositions
             if (!matrix.IsSymmetric())
             {
                 throw new NonSymmetricMatrixException(
-                    "Cholesky decomposition cannot aply to non-symmetric matrices.");
+                    "Cholesky decomposition cannot apply to non-symmetric matrices.");
             }
 
             lower = new Matrix(matrix.Rows, matrix.Columns);

@@ -24,7 +24,7 @@ namespace NMatrix.Decompositions
 
             if (!matrix.IsSquare)
             {
-                throw new NonSquareMatrixException("LU decomposition cannot aply to non-square matrices.");
+                throw new NonSquareMatrixException("LU decomposition cannot apply to non-square matrices.");
             }
 
             lower = new Matrix(matrix.Rows, matrix.Columns);
