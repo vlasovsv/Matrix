@@ -247,7 +247,12 @@ Matrix operations can throw exception if something went wrong. The main exceptio
 * Trying to subtract matrices with different sizes (m1.Rows != m2.Rows || m1.Columns != m2.Columns)
 * Trying to multiply matrices with mismatched sizes (m1.Rows != m2.Columns)
 * Trying to get a minor matrix for matrices with size less or equal 2x2
-* Trying to get a determinant for non-square matrices
 * Trying to get an adjoint matrix for non-square matrices or matrices with size less than 3x3
 
-You can also get ArgumentNullException if put null matrix into any method.
+You can get NonSquareMatrixException:
+* Trying to get a determinant for non-square matrices.
+* Trying to get adjoint matrix for non-square matrices.
+
+You can also get next exceptions:
+* ArgumentNullException if you put null matrix into any method
+* ArgumentException if you put arguments that do not fulfil method's conditions.
