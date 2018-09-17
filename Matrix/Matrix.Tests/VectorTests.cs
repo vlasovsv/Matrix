@@ -1,6 +1,6 @@
 ﻿using NUnit.Framework;
 
-namespace NMatrix
+namespace NMatrix.Tests
 {
     [TestFixture()]
     class VectorTests

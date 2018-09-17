@@ -1,7 +1,8 @@
-using NUnit.Framework;
 using System;
 
-namespace NMatrix
+using NUnit.Framework;
+
+namespace NMatrix.Tests
 {
     [TestFixture()]
     public class MatrixTests
@@ -212,7 +213,7 @@ namespace NMatrix
 
             var expected = 1776;
 
-            Assert.AreEqual(expected, result);
+            Assert.That(result, Is.EqualTo(expected).Within(0.000001));
         }
 
         [Test]

@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
+
+using NMatrix.Decompositions;
 
 namespace NMatrix
 {
     /// <summary>
     /// Represents a matrix class.
     /// </summary>
-    public class Matrix : IEquatable<Matrix>
+    public class Matrix : IEquatable<Matrix>, IEnumerable
     {
         #region Private fields
 
@@ -300,15 +304,15 @@ namespace NMatrix
                 return Determinant3x3();
             }
 
-            double determinant = 0;
+            double determinant = 1;
 
-            Matrix minor;
+            var luDecomposition = new LupDecomposition();
 
-            for (int j = 0; j < Columns; j++)
+            luDecomposition.CalculateLUPMatrices(this, out Matrix c, out Matrix p);
+
+            for (int i = 0; i < c.Rows; i++)
             {
-                minor = this.Minor(0, j);
-
-                determinant += Math.Pow(-1, j) * _buffer[0, j] * minor.Determinant();
+                determinant *= c[i, i];
             }
 
             return determinant;
@@ -658,6 +662,31 @@ namespace NMatrix
             }
 
             return sb.ToString();
+        }
+
+        /// <summary>
+        /// Clones current matrix.
+        /// </summary>
+        /// <returns>
+        /// Returns a matrix clone.
+        /// </returns>
+        public Matrix Clone()
+        {
+            var buffer = new double[Rows, Columns];
+            Array.Copy(_buffer, buffer, _buffer.Length);
+
+            return Matrix.From(buffer);
+        }
+
+        /// <summary>
+        /// Gets an enumerator for inner matrix buffer.
+        /// </summary>
+        /// <returns>
+        /// Returns an enumerator.
+        /// </returns>
+        public IEnumerator GetEnumerator()
+        {
+            return _buffer.GetEnumerator();
         }
 
         #endregion

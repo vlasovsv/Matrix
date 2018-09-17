@@ -2,7 +2,7 @@
 
 using NMatrix.Decompositions;
 
-namespace NMatrix
+namespace NMatrix.Tests
 {
     [TestFixture()]
     public class LUDecompositionTests
