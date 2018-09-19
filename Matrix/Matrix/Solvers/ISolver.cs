@@ -3,7 +3,7 @@
     /// <summary>
     /// Represents a solver of a system of linear equations.
     /// </summary>
-    interface ISolver
+    public interface ISolver
     {
         #region Methods
 

@@ -72,6 +72,11 @@ namespace NMatrix
         public bool IsSquare => _rows == _columns;
 
         /// <summary>
+        /// Gets a flag if this matrix is symmetric or not.
+        /// </summary>
+        public bool IsSymmetric => GetIsSymmetric();
+
+        /// <summary>
         /// Gets or sets a value corresponding to a row and a column of the matrix.
         /// </summary>
         /// <param name="row">Value row index.</param>
@@ -425,7 +430,7 @@ namespace NMatrix
         /// <returns>
         /// Returns true if this matrix is symmetric, othewise - false.
         /// </returns>
-        public bool IsSymmetric()
+        private bool GetIsSymmetric()
         {
             if (!IsSquare)
             {

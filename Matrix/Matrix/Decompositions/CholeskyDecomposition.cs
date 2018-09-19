@@ -22,7 +22,7 @@ namespace NMatrix.Decompositions
                 throw new ArgumentNullException("Original matrix could not be null.");
             }
 
-            if (!matrix.IsSymmetric())
+            if (!matrix.IsSymmetric)
             {
                 throw new NonSymmetricMatrixException(
                     "Cholesky decomposition cannot apply to non-symmetric matrices.");
