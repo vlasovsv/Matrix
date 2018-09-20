@@ -5,9 +5,9 @@ using NMatrix.Decompositions;
 namespace NMatrix.Solvers
 {
     /// <summary>
-    /// Represents Cholesky solver.
+    /// Represents LUP-solver.
     /// </summary>
-    public sealed class CholeskySolver : ISolver
+    public sealed class LupSolver : ISolver
     {
         #region Methods
 
@@ -36,11 +36,11 @@ namespace NMatrix.Solvers
                 throw new ArgumentException("Factor matrix and right vector have inconsistence size.");
             }
 
-            var decomposition = new CholeskyDecomposition();
-            decomposition.CalculateLLtMatrices(factor, out Matrix lower, out Matrix lowerTransposed);
+            var decomposition = new LupDecomposition();
+            decomposition.CalculateLUPMatrices(factor, out Matrix c, out Matrix p);
 
-            var y = SolveLower(lower, right);
-            var x = SolveUpper(lowerTransposed, y);
+            var y = SolveLower(c, p*right);
+            var x = SolveUpper(c, y);
 
             return x;
         }
@@ -64,7 +64,7 @@ namespace NMatrix.Solvers
                 {
                     if (i == j)
                     {
-                        y[i] = bi / lower[i, j];
+                        y[i] = bi;
                     }
                     else
                     {

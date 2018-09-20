@@ -105,7 +105,7 @@ namespace NMatrix.Tests
         {
             var matrix1 = new Matrix(2, 3);
 
-            Assert.Throws<ArgumentNullException>(() => matrix1.Multiply(null));
+            Assert.Throws<ArgumentNullException>(() => matrix1.Multiply((Matrix)null));
         }
 
         [Test]
@@ -263,6 +263,19 @@ namespace NMatrix.Tests
         {
             var expected = new Matrix(3, 3, new double[,] { { 1, 2, 3 }, { 7, 2, 5 }, { 8, 1, 3 } });
             var result = Matrix.From(new double[,] { { 1, 2, 3 }, { 7, 2, 5 }, { 8, 1, 3 } });
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void Matrix_MultiplyOnVector_ReturnsResultAsExpected()
+        {
+            var permutations = new Matrix(3, 3, new double[,] { { 0, 1, 0 }, { 0, 0, 1 }, { 1, 0, 0 } });
+            var vector = new Vector(3, new double[] { 1, 6, 4 });
+
+            var expected = new Vector(3, new double[] { 6, 4, 1 });
+
+            var result = permutations * vector;
 
             Assert.AreEqual(expected, result);
         }

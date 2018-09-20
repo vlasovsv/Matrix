@@ -223,6 +223,39 @@ namespace NMatrix
         }
 
         /// <summary>
+        /// Multiplies a vector.
+        /// </summary>
+        /// <param name="x">A vector.</param>
+        /// <returns>
+        /// Returns a new vector.
+        /// </returns>
+        public Vector Multiply(Vector x)
+        {
+            if (x == null)
+            {
+                throw new ArgumentNullException("Vector cannot be null");
+            }
+
+            if (Rows != x.Size)
+            {
+                throw new VectorInconsistencyException(
+                    "The matrix and multiplied vector have an inconsistance size.");
+            }
+
+            var result = new Vector(x.Size);
+
+            for (int i = 0; i < Rows; i++)
+            {
+                for (int j = 0; j < Columns; j++)
+                {
+                    result[i] += this[i, j] * x[j];
+                }
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Divides on a scalar.
         /// </summary>
         /// <param name="x">Scalar.</param>
@@ -509,7 +542,7 @@ namespace NMatrix
         public static Matrix operator *(Matrix m1, Matrix m2) => m1.Multiply(m2);
 
         /// <summary>
-        /// Multiplies a matrix on a scalar.
+        /// Multiplies a matrix by a scalar.
         /// </summary>
         /// <param name="m1">A matrix.</param>
         /// <param name="scalar">A scalar.</param>
@@ -517,6 +550,16 @@ namespace NMatrix
         /// Returns a result of multiplication of a matrix by a scalar.
         /// </returns>
         public static Matrix operator *(Matrix m1, double scalar) => m1.Multiply(scalar);
+
+        /// <summary>
+        /// Multiplies a matrix by a vector.
+        /// </summary>
+        /// <param name="m1">A matrix.</param>
+        /// <param name="vector">A vector.</param>
+        /// <returns>
+        /// Returns a result of multiplication of a matrix by a vector.
+        /// </returns>
+        public static Vector operator *(Matrix m1, Vector vector) => m1.Multiply(vector);
 
         /// <summary>
         /// Divides a matrix on a scalar.
