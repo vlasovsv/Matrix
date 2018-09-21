@@ -12,7 +12,7 @@ namespace NMatrix.Tests
         [Test]
         public void LupDecomposition_CalculateLUMatrices_ReturnsAsExpected()
         {
-            var luDecomposition = new LupDecomposition();
+            var lupDecomposition = new LupDecomposition();
             var matrix = new Matrix(4, 4,
                 new double[,] { { 2, 1, 1, 0 }, { 4, 3, 3, 1 }, { 8, 7, 9, 5 }, { 6, 7, 9, 8 } });
 
@@ -21,7 +21,7 @@ namespace NMatrix.Tests
             var expectedP = new Matrix(4, 4,
                 new double[,] { { 0, 0, 1, 0 }, { 0, 0, 0, 1 }, { 0, 1, 0, 0 }, { 1, 0, 0, 0 } });
 
-            luDecomposition.CalculateLUPMatrices(matrix, out Matrix c, out Matrix p);
+            lupDecomposition.CalculateLUPMatrices(matrix, out Matrix c, out Matrix p);
 
             Assert.That(c.Cast<double>(), Is.EqualTo(expectedC.Cast<double>()).Within(0.00001));
             Assert.AreEqual(expectedP, p);
