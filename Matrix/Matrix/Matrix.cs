@@ -26,8 +26,8 @@ namespace NMatrix
         /// <summary>
         /// Creates a new matrix.
         /// </summary>
-        /// <param name="rows">Rows.</param>
-        /// <param name="columns">Columns.</param>
+        /// <param name="rows">Number of rows.</param>
+        /// <param name="columns">Number of columns.</param>
         public Matrix(int rows, int columns)
         {
             CheckSize(rows, columns);
