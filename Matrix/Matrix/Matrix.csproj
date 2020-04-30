@@ -9,10 +9,10 @@
     <Company />
     <RepositoryUrl>https://github.com/vlasovsv/Matrix</RepositoryUrl>
     <PackageProjectUrl>https://github.com/vlasovsv/Matrix</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/vlasovsv/Matrix/blob/master/LICENSE</PackageLicenseUrl>
     <Description>General purpose matrix library.</Description>
     <PackageTags>matrix detrerminant inverse transpose</PackageTags>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
 </Project>
