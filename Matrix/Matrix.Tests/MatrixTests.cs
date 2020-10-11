@@ -315,8 +315,6 @@ namespace NMatrix.Tests
         public void Matrix_FrobeniusNorm_IdentityMatrix_ReturnsResultAsExpected()
         {
             var m = Matrix.Ones(3);
-
-            Console.WriteLine(m.ToString());
             
             var result = m.FrobeniusNorm();
 
