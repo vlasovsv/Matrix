@@ -5,17 +5,18 @@ namespace NMatrix.Decompositions
     /// <summary>
     /// Represents LUP decomposition.
     /// </summary>
-    public sealed class LupDecomposition
+    public sealed class LupDecomposition : IDecomposition<LupResult>
     {
         #region Methods
 
         /// <summary>
-        /// Calculates C and P matrices for current matrix.
+        /// Decomposes an initial matrix into matrices C and P. 
         /// </summary>
-        /// <param name="matrix">Current matrix.</param>
-        /// <param name="c">Out C matrix (C = L + U - E).</param>
-        /// <param name="p">Out P matrix (permuation matrix).</param>
-        public void CalculateLUPMatrices(Matrix matrix, out Matrix c, out Matrix p)
+        /// <param name="matrix">An initial matrix</param>
+        /// <returns>
+        /// Returns LUP decomposition result.
+        /// </returns>
+        public LupResult Decompose(Matrix matrix)
         {
             if (matrix == null)
             {
@@ -27,9 +28,9 @@ namespace NMatrix.Decompositions
                 throw new NonSquareMatrixException("LUP decomposition cannot apply to non-square matrices.");
             }
 
-            c = matrix.Clone();
+            var c = matrix.Clone();
 
-            p = Matrix.Identity(c.Rows);
+            var p = Matrix.Identity(c.Rows);
 
             var n = c.Rows;
 
@@ -71,6 +72,8 @@ namespace NMatrix.Decompositions
                     }
                 }
             }
+
+            return new LupResult(c, p);
         }
 
         #endregion

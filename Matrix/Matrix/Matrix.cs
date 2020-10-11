@@ -346,7 +346,7 @@ namespace NMatrix
 
             var luDecomposition = new LupDecomposition();
 
-            luDecomposition.CalculateLUPMatrices(this, out Matrix c, out Matrix p);
+            var (c, _) = luDecomposition.Decompose(this);
 
             for (int i = 0; i < c.Rows; i++)
             {
@@ -509,6 +509,26 @@ namespace NMatrix
             }
         }
 
+        /// <summary>
+        /// Calcalates matrix trace.
+        /// </summary>
+        /// <returns>
+        /// Returns matrix trace.
+        /// </returns>
+        public double Trace()
+        {
+            if (!IsSquare)
+                throw new NonSquareMatrixException("Cannot calculate trace for non-square matrices");
+
+            var trace = 0d;
+            for (int i = 0; i < Rows; i++)
+            {
+                trace += _buffer[i, i];
+            }
+
+            return trace;
+        }
+
         #region Operators
 
         /// <summary>
@@ -591,6 +611,108 @@ namespace NMatrix
 
         #endregion
 
+        #region Matrix norms
+
+        /// <summary>
+        /// Calculates matrix p-norm.
+        /// </summary>
+        /// <param name="p">p-norm.</param>
+        /// <returns>
+        /// Returns a matrix p-norm.
+        /// </returns>
+        public double Norm(double p)
+        {
+            if (p < 1)
+                throw new ArgumentException("p-norm cannot be less than 1.");
+
+            return p switch 
+            {
+                1 => NormOne(),
+                2 => NormTwo(),
+                double.PositiveInfinity => NormInfinity(),
+                _ => throw new ArgumentException("Unsupported p-norm")
+            };
+        }
+
+        /// <summary>
+        /// Calculates matrix p1-norm.
+        /// </summary>
+        /// <returns>
+        /// Returns a matrix p1-norm.
+        /// </returns>
+        public double NormOne()
+        {
+            var result = 0d;
+            for (int j = 0; j < Columns; j++)
+            {
+                var sum = 0d;
+                for (int i = 0; i < Rows; i++)
+                {
+                    sum += _buffer[i, j];
+                }
+               
+                result = Math.Max(result, sum);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Calculates matrix p∞-norm.
+        /// </summary>
+        /// <returns>
+        /// Returns a matrix p∞-norm.
+        /// </returns>
+        public double NormInfinity()
+        {
+            var result = 0d;
+            for (int i = 0; i < Rows; i++)
+            {
+                var sum = 0d;
+                for (int j = 0; j < Columns; j++)
+                {
+                    sum += _buffer[i, j];
+                }
+               
+                result = Math.Max(result, sum);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Calculates matrix p2-norm.
+        /// </summary>
+        /// <returns>
+        /// Returns a matrix p2-norm.
+        /// </returns>
+        public double NormTwo()
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Calculates Frobenius norm of matrix.
+        /// </summary>
+        /// <returns>
+        /// Returns Frobenius norm of matrix.
+        /// </returns>
+        public double FrobeniusNorm()
+        {
+            var result = 0d;
+            for (int i = 0; i < Rows; i++)
+            {
+                for (int j = 0; j < Columns; j++)
+                {
+                    result += Math.Pow(_buffer[i, j], 2);
+                }
+            }
+
+            return Math.Sqrt(result);
+        }
+
+        #endregion
+
         #region Factories
 
         /// <summary>
@@ -611,6 +733,32 @@ namespace NMatrix
             for (int i = 0; i < n; i++)
             {
                 buffer[i, i] = 1;
+            }
+
+            return new Matrix(n, n, buffer);
+        }
+
+        /// <summary>
+        /// Creates a new ones matrix with size n x n.
+        /// </summary>
+        /// <param name="n">Matrix size.</param>
+        /// <returns>
+        /// Returns a new ones matrix.
+        /// </returns>
+        public static Matrix Ones(int n)
+        {
+            if (n < 2)
+            {
+                throw new ArgumentException("Size of a square matrix could not be less than 2.", nameof(n));
+            }
+
+            var buffer = new double[n, n];
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    buffer[i, j] = 1;
+                }
             }
 
             return new Matrix(n, n, buffer);

@@ -37,10 +37,10 @@ namespace NMatrix.Solvers
             }
 
             var decomposition = new CholeskyDecomposition();
-            decomposition.CalculateLLtMatrices(factor, out Matrix lower, out Matrix lowerTransposed);
+            var(l, lt) = decomposition.Decompose(factor);
 
-            var y = SolveLower(lower, right);
-            var x = SolveUpper(lowerTransposed, y);
+            var y = SolveLower(l, right);
+            var x = SolveUpper(lt, y);
 
             return x;
         }

@@ -5,17 +5,18 @@ namespace NMatrix.Decompositions
     /// <summary>
     /// LU-decomposition.
     /// </summary>
-    public class LUDecomposition
+    public class LUDecomposition : IDecomposition<LUResult>
     {
         #region Methods
 
         /// <summary>
-        /// Calculates l (lower) and u (upper) matrices for current matrix.
+        /// Decomposes an initial matrix into matrices L and U. 
         /// </summary>
-        /// <param name="matrix">Current matrix.</param>
-        /// <param name="lower">Out l (lower) matrix.</param>
-        /// <param name="upper">Out u (upper) matrix.</param>
-        public void CalculateLUMatrices(Matrix matrix, out Matrix lower, out Matrix upper)
+        /// <param name="matrix">An initial matrix</param>
+        /// <returns>
+        /// Returns LU decomposition result.
+        /// </returns>
+        public LUResult Decompose(Matrix matrix)
         {
             if (matrix == null)
             {
@@ -27,8 +28,8 @@ namespace NMatrix.Decompositions
                 throw new NonSquareMatrixException("LU decomposition cannot apply to non-square matrices.");
             }
 
-            lower = new Matrix(matrix.Rows, matrix.Columns);
-            upper = new Matrix(matrix.Rows, matrix.Columns);
+            var lower = new Matrix(matrix.Rows, matrix.Columns);
+            var upper = new Matrix(matrix.Rows, matrix.Columns);
 
             for (int j = 0; j < matrix.Columns; j++)
             {
@@ -57,6 +58,8 @@ namespace NMatrix.Decompositions
                     lower[j, i] = (1 / upper[i, i]) * (matrix[j, i] - sum);
                 }
             }
+
+            return new LUResult(lower, upper);
         }
 
         #endregion

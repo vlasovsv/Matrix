@@ -279,5 +279,75 @@ namespace NMatrix.Tests
 
             Assert.AreEqual(expected, result);
         }
+
+        [Test]
+        public void Matrix_NormOne_ReturnsResultAsExpected()
+        {
+            var m = new Matrix(3, 3, new double[,] { { 3, 5, 7 }, { 2, 6, 4 }, { 0, 2, 8 } });
+            
+            var result = m.NormOne();
+
+            Assert.AreEqual(19, result);
+        }
+
+        [Test]
+        public void Matrix_NormInfinity_ReturnsResultAsExpected()
+        {
+            var m = new Matrix(3, 3, new double[,] { { 3, 5, 7 }, { 2, 6, 4 }, { 0, 2, 8 } });
+            
+            var result = m.NormInfinity();
+
+            Assert.AreEqual(15, result);
+        }
+
+        [TestCase(1, 19)]
+        [TestCase(double.PositiveInfinity, 15)]
+        public void Matrix_Norm_ReturnsResultAsExpected(double p, double expected)
+        {
+            var m = new Matrix(3, 3, new double[,] { { 3, 5, 7 }, { 2, 6, 4 }, { 0, 2, 8 } });
+            
+            var result = m.Norm(p);
+
+            Assert.AreEqual(expected, result);
+        }
+
+        [Test]
+        public void Matrix_FrobeniusNorm_IdentityMatrix_ReturnsResultAsExpected()
+        {
+            var m = Matrix.Ones(3);
+
+            Console.WriteLine(m.ToString());
+            
+            var result = m.FrobeniusNorm();
+
+            Assert.AreEqual(3, result);
+        }
+
+        [Test]
+        public void Matrix_Trace_NonSquareMatrix_Thorws_NonSquareMatrixException()
+        {
+            var m = new Matrix(3, 2);
+
+            Assert.Throws<NonSquareMatrixException>(() => m.Trace());
+        }
+
+        [Test]
+        public void Matrix_Trace_ReturnsResultAsExpected()
+        {
+            var m = Matrix.From(new double[,] { {1, 2}, {2, 3} });
+
+            var trace = m.Trace();
+
+            Assert.AreEqual(4, trace);
+        }
+
+        [Test]
+        public void Matrix_Trace_ForTransposedMatrix_ReturnsTheSame()
+        {
+            var m = Matrix.From(new double[,] { {1, 2}, {2, 3} });
+            var mt = m.Transpose();
+
+            Assert.AreEqual(mt.Trace(), m.Trace());
+        }
     }
 }

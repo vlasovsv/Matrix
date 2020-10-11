@@ -16,7 +16,7 @@ namespace NMatrix.Tests
             var expectedL = new Matrix(2, 2, new double[,] { { 1, 0 }, { 1.5, 1 } });
             var expectedU = new Matrix(2, 2, new double[,] { { 4, 3 }, { 0, -1.5 } });
 
-            luDecomposition.CalculateLUMatrices(matrix, out Matrix l, out Matrix u);
+            var (l, u) = luDecomposition.Decompose(matrix);
 
             Assert.AreEqual(expectedL, l);
             Assert.AreEqual(expectedU, u);

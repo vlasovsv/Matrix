@@ -5,17 +5,18 @@ namespace NMatrix.Decompositions
     /// <summary>
     /// Represents Cholesky-decomposition.
     /// </summary>
-    public class CholeskyDecomposition
+    public class CholeskyDecomposition : IDecomposition<CholeskyResult>
     {
         #region Methods
 
         /// <summary>
-        /// Calculates L (lower) and Lt (lower transposed) matrices for current matrix.
+        /// Decomposes an initial matrix into matrices L and L*. 
         /// </summary>
-        /// <param name="matrix">Current matrix.</param>
-        /// <param name="lower">Out L (lower) matrix.</param>
-        /// <param name="lowerTransposed">Out Lt (lower transposed) matrix.</param>
-        public void CalculateLLtMatrices(Matrix matrix, out Matrix lower, out Matrix lowerTransposed)
+        /// <param name="matrix">An initial matrix</param>
+        /// <returns>
+        /// Returns Cholesky decomposition result.
+        /// </returns>
+        public CholeskyResult Decompose(Matrix matrix)
         {
             if (matrix == null)
             {
@@ -28,7 +29,7 @@ namespace NMatrix.Decompositions
                     "Cholesky decomposition cannot apply to non-symmetric matrices.");
             }
 
-            lower = new Matrix(matrix.Rows, matrix.Columns);
+            var lower = new Matrix(matrix.Rows, matrix.Columns);
 
             for (int i = 0; i < matrix.Rows; i++)
             {
@@ -56,7 +57,9 @@ namespace NMatrix.Decompositions
                 }
             }
 
-            lowerTransposed = lower.Transpose();
+            var lowerTransposed = lower.Transpose();
+
+            return new CholeskyResult(lower, lowerTransposed);
         }
 
         #endregion

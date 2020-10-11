@@ -21,7 +21,7 @@ namespace NMatrix.Tests
             var expectedP = new Matrix(4, 4,
                 new double[,] { { 0, 0, 1, 0 }, { 0, 0, 0, 1 }, { 0, 1, 0, 0 }, { 1, 0, 0, 0 } });
 
-            lupDecomposition.CalculateLUPMatrices(matrix, out Matrix c, out Matrix p);
+            var (c, p) = lupDecomposition.Decompose(matrix);
 
             Assert.That(c.Cast<double>(), Is.EqualTo(expectedC.Cast<double>()).Within(0.00001));
             Assert.AreEqual(expectedP, p);

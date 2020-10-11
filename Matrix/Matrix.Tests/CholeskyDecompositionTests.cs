@@ -16,7 +16,7 @@ namespace NMatrix.Tests
             var expectedL = new Matrix(3, 3, new double[,] { { 9, 0, 0 }, { -5, 5, 0 }, { 5, 2, 3 } });
             var expectedLt = new Matrix(3, 3, new double[,] { { 9, -5, 5 }, { 0, 5, 2 }, { 0, 0, 3 } });
 
-            choleskyDecomposition.CalculateLLtMatrices(matrix, out Matrix l, out Matrix lt);
+            var (l, lt) = choleskyDecomposition.Decompose(matrix);
 
             Assert.AreEqual(expectedL, l);
             Assert.AreEqual(expectedLt, lt);

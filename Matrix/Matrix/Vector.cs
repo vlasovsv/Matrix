@@ -240,14 +240,10 @@ namespace NMatrix
         public double Norm(double p)
         {
             if (p < 1)
-            {
                 throw new ArgumentException("p-norm cannot be less than 1.");
-            }
 
             if (p == double.PositiveInfinity)
-            {
                 return _buffer.Max();
-            }
             else
             {
                 var sum = 0.0;
@@ -260,6 +256,12 @@ namespace NMatrix
             }
         }
 
+        /// <summary>
+        /// Normalizes the vector.
+        /// </summary>
+        /// <returns>
+        /// Returns a normalized vector.
+        /// </returns>
         public Vector Normalize()
         {
             return this / Norm();

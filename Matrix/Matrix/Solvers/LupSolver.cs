@@ -37,7 +37,7 @@ namespace NMatrix.Solvers
             }
 
             var decomposition = new LupDecomposition();
-            decomposition.CalculateLUPMatrices(factor, out Matrix c, out Matrix p);
+            var (c, p) = decomposition.Decompose(factor);
 
             var y = SolveLower(c, p*right);
             var x = SolveUpper(c, y);
