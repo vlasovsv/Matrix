@@ -2,7 +2,7 @@
 
 |          | Status |
 | -------- | ------ |
-| NMatrix | [![Build status](https://ci.appveyor.com/api/projects/status/8er5o6y5dqdu8iq4/branch/master?svg=true)](https://ci.appveyor.com/project/vlasovsv/matrix/branch/master) |
+| NMatrix | ![.NET Core](https://github.com/vlasovsv/Matrix/workflows/.NET%20Core/badge.svg?branch=master) |
 
 # NMatrix
 NMatrix is a general purpose matrix library that you can use to perform basic matrix operations like:
